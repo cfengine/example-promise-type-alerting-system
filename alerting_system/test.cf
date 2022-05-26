@@ -1,22 +1,18 @@
 bundle agent test_alerting_system
 {
   classes:
-    "things_went_wrong"
-      if => fileexists("/var/cfengine/redalert");
-
-#  commands:
-#    things_went_wrong::
-#      "/bin/reporter"
-#        argslist => { "mailserver" , "there was an error - crash" };
+     "things_went_wrong"
+       if => fileexists("/var/cfengine/redalert");
 
   alerting_system:
     things_went_wrong::
-      "mailserver"
-        message => "there was an error - crash";
-      "mailserver"
-        message => "there was an error - timeout";
-    # Logging: info, error, critical (reports:)
-    # Result classes: error_was_logged
-   reports:
-     "Hello";
+      "There was an error in the mailserver"
+        component => "mailserver",
+        severity => "error";
+      "There was an error in the file server"
+        component => "my_component",
+        severity => "error";
+
+  reports:
+    "My test_alerting_system bundle is running";
 }
