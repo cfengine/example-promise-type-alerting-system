@@ -1,0 +1,6 @@
+promise agent alerting_system
+# @brief Define alerting_system promise type
+{
+  path => "$(sys.workdir)/modules/promises/alerting_system.py";
+  interpreter => "/usr/bin/python3";
+}

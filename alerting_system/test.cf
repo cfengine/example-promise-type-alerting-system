@@ -1,0 +1,22 @@
+bundle agent test_alerting_system
+{
+  classes:
+    "things_went_wrong"
+      if => fileexists("/var/cfengine/redalert");
+
+#  commands:
+#    things_went_wrong::
+#      "/bin/reporter"
+#        argslist => { "mailserver" , "there was an error - crash" };
+
+  alerting_system:
+    things_went_wrong::
+      "mailserver"
+        message => "there was an error - crash";
+      "mailserver"
+        message => "there was an error - timeout";
+    # Logging: info, error, critical (reports:)
+    # Result classes: error_was_logged
+   reports:
+     "Hello";
+}

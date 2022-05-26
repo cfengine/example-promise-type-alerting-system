@@ -1,0 +1,43 @@
+{
+  "name": "Example",
+  "type": "policy-set",
+  "description": "summit",
+  "git": false,
+  "build": [
+    {
+      "name": "masterfiles",
+      "description": "Official CFEngine Masterfiles Policy Framework (MPF)",
+      "tags": ["supported", "base"],
+      "repo": "https://github.com/cfengine/masterfiles",
+      "by": "https://github.com/cfengine",
+      "version": "3.18.1-1",
+      "commit": "b6e9eacc65c797f4c2b4a59056293636c320d0c9",
+      "added_by": "cfbs add",
+      "steps": ["run ./prepare.sh -y", "copy ./ ./"]
+    },
+    {
+      "name": "library-for-promise-types-in-python",
+      "description": "Library enabling promise types implemented in python",
+      "tags": ["supported", "library"],
+      "repo": "https://github.com/cfengine/modules",
+      "by": "https://github.com/cfengine",
+      "version": "0.1.1",
+      "commit": "c3b7329b240cf7ad062a0a64ee8b607af2cb912a",
+      "subdirectory": "libraries/python/",
+      "added_by": "cfbs add",
+      "steps": ["copy cfengine.py modules/promises/"]
+    },
+    {
+      "name": "./alerting_system/",
+      "description": "Work in progress alerting system promise type and policy",
+      "tags": ["local"],
+      "added_by": "cfbs add",
+      "steps": [
+        "copy alerting_system.py modules/promises/alerting_system.py",
+        "append enable.cf services/init.cf",
+        "delete alerting_system.py enable.cf",
+        "directory ./ services/cfbs/alerting_system/"
+      ]
+    }
+  ]
+}

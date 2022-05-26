@@ -1,0 +1,5 @@
+{
+  "variables": {
+     "control_common_bundlesequence_end": ["test_alerting_system"]
+  }
+}
